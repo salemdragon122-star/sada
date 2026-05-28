@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💖 Date Invitation 💖</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0, #f48fb1);
+      font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(6px);
+      border-radius: 40px;
+      box-shadow: 0 20px 40px rgba(233, 30, 99, 0.2);
+      padding: 40px 35px;
+      max-width: 550px;
+      width: 100%;
+      text-align: center;
+      border: 2px solid #fff;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #c2185b;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      color: #880e4f;
+      font-weight: 500;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+    }
+
+    .section {
+      margin: 25px 0;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 30px;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .section h3 {
+      color: #ad1457;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .section h3 span {
+      font-size: 1.6rem;
+    }
+
+    label, .option-label {
+      font-weight: 500;
+      color: #4a1a2e;
+    }
+
+    input[type="date"] {
+      padding: 12px 18px;
+      border: 2px solid #f48fb1;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      background: white;
+      color: #4a1a2e;
+      outline: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    input[type="date"]:focus {
+      border-color: #c2185b;
+      box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.2);
+    }
+
+    .options-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .option-box {
+      background: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: 2px solid #f8bbd0;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      color: #4a1a2e;
+      user-select: none;
+    }
+
+    .option-box:hover {
+      border-color: #c2185b;
+      background: #fce4ec;
+      transform: scale(1.03);
+    }
+
+    .option-box input {
+      display: none;
+    }
+
+    .option-box.selected {
+      background: #c2185b;
+      color: white;
+      border-color: #c2185b;
+    }
+
+    .button-group {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      align-items: center;
+      position: relative;
+      min-height: 80px;
+    }
+
+    .btn {
+      padding: 16px 40px;
+      border: none;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #e91e63, #c2185b);
+      color: white;
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+    }
+
+    .btn-no {
+      background: #ddd;
+      color: #555;
+      position: absolute;
+      cursor: default; /* will be overridden by JS, but nice */
+      transition: 0.1s;
+    }
+
+    .btn-no:hover {
+      /* no hover effect, it moves */
+    }
+
+    .response-message {
+      margin-top: 25px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #c2185b;
+      min-height: 50px;
+    }
+
+    .hearts {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    /* small screens */
+    @media (max-width: 480px) {
+      .card { padding: 25px 20px; }
+      h1 { font-size: 2rem; }
+      .btn { padding: 12px 25px; font-size: 1.2rem; }
+      .button-group { gap: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>💌 You're Invited!</h1>
+    <div class="subtitle">✨ Let's plan the perfect date ✨</div>
+
+    <!-- Date picker -->
+    <div class="section">
+      <h3><span>📅</span> Pick a day</h3>
+      <input type="date" id="datePicker" value="2025-06-14" min="2025-06-14" />
+    </div>
+
+    <!-- Food options (multi-select) -->
+    <div class="section">
+      <h3><span>🍽️</span> What should we eat?</h3>
+      <div class="options-grid" id="foodOptions">
+        <div class="option-box" data-value="pizza">🍕 Pizza</div>
+        <div class="option-box" data-value="sushi">🍣 Sushi</div>
+        <div class="option-box" data-value="tacos">🌮 Tacos</div>
+        <div class="option-box" data-value="pasta">🍝 Pasta</div>
+        <div class="option-box" data-value="dessert">🍰 Just dessert</div>
+      </div>
+    </div>
+
+    <!-- Fun activities (multi-select) -->
+    <div class="section">
+      <h3><span>🎉</span> Fun things to do</h3>
+      <div class="options-grid" id="activitiesOptions">
+        <div class="option-box" data-value="movies">🎬 Movies</div>
+        <div class="option-box" data-value="bowling">🎳 Bowling</div>
+        <div class="option-box" data-value="walk">🌳 Walk in park</div>
+        <div class="option-box" data-value="games">🎮 Arcade games</div>
+        <div class="option-box" data-value="karaoke">🎤 Karaoke</div>
+        <div class="option-box" data-value="dancing">💃 Dancing</div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-group">
+      <button class="btn btn-yes" id="yesBtn">💖 YES!</button>
+      <button class="btn btn-no" id="noBtn">😅 No</button>
+    </div>
+
+    <div class="response-message" id="responseMessage"></div>
+    <div class="hearts" id="heartsDisplay"></div>
+  </div>
+
+  <script>
+    (function() {
+      // ---------- Helper: toggle option boxes ----------
+      function setupOptionBoxes(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const boxes = container.querySelectorAll('.option-box');
+        boxes.forEach(box => {
+          box.addEventListener('click', function(e) {
+            // Toggle selected class
+            this.classList.toggle('selected');
+          });
+        });
+      }
+
+      setupOptionBoxes('foodOptions');
+      setupOptionBoxes('activitiesOptions');
+
+      // ---------- No button runaway ----------
+      const noBtn = document.getElementById('noBtn');
+      const card = document.querySelector('.card');
+
+      function moveButtonAway(e) {
+        // Get card boundaries to keep button inside
+        const cardRect = card.getBoundingClientRect();
+        const btnRect = noBtn.getBoundingClientRect();
+
+        // Calculate random position inside the card (with padding)
+        const padding = 20;
+        const maxX = cardRect.width - btnRect.width - padding * 2;
+        const maxY = cardRect.height - btnRect.height - padding * 2;
+
+        // Get current position relative to card
+        const currentX = noBtn.offsetLeft;
+        const currentY = noBtn.offsetTop;
+
+        let newX, newY;
+        let attempts = 0;
+        // Keep generating until position is significantly different (to avoid sticking)
+        do {
+          newX = Math.random() * maxX + padding;
+          newY = Math.random() * maxY + padding;
+          attempts++;
+        } while (
+          Math.abs(newX - currentX) < 30 && 
+          Math.abs(newY - currentY) < 30 && 
+          attempts < 20
+        );
+
+        noBtn.style.left = newX + 'px';
+        noBtn.style.top = newY + 'px';
+        noBtn.style.position = 'absolute';
+      }
+
+      // Initialize no button as absolute inside card (but card needs relative)
+      card.style.position = 'relative';
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = '60%'; // initial position
+      noBtn.style.top = '20px';
+      noBtn.style.transform = 'translateX(-50%)';
+
+      // Move on mouseover (and also on click for safety)
+      noBtn.addEventListener('mouseover', moveButtonAway);
+      noBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        moveButtonAway(e);
+      });
+
+      // Also move when window resizes (to keep button inside)
+      window.addEventListener('resize', function() {
+        // reposition if out of bounds
+        const cardRect = card.getBoundingClientRect();
+        const btnRect = noBtn.getBoundingClientRect();
+        let left = parseFloat(noBtn.style.left) || 0;
+        let top = parseFloat(noBtn.style.top) || 0;
+        if (left + btnRect.width > cardRect.width - 10) {
+          noBtn.style.left = (cardRect.width - btnRect.width - 20) + 'px';
+        }
+        if (top + btnRect.height > cardRect.height - 10) {
+          noBtn.style.top = (cardRect.height - btnRect.height - 20) + 'px';
+        }
+      });
+
+      // ---------- Yes button ----------
+      const yesBtn = document.getElementById('yesBtn');
+      const responseMessage = document.getElementById('responseMessage');
+      const heartsDisplay = document.getElementById('heartsDisplay');
+
+      yesBtn.addEventListener('click', function() {
+        // Get selected date
+        const dateInput = document.getElementById('datePicker');
+        const selectedDate = dateInput.value ? new Date(dateInput.value + 'T00:00:00') : null;
+        const dateStr = selectedDate ? selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'a day you choose';
+
+        // Get selected food
+        const foodBoxes = document.querySelectorAll('#foodOptions .option-box.selected');
+        const foodList = Array.from(foodBoxes).map(box => box.innerText.trim()).join(', ') || 'something yummy';
+
+        // Get selected activities
+        const activityBoxes = document.querySelectorAll('#activitiesOptions .option-box.selected');
+        const activityList = Array.from(activityBoxes).map(box => box.innerText.trim()).join(', ') || 'something fun';
+
+        // Build lovely response
+        let msg = `💕 Amazing! I can't wait for our date on <strong>${dateStr}</strong>!<br>`;
+        msg += `We'll eat <strong>${foodList}</strong> and then <strong>${activityList}</strong>.<br>`;
+        msg += `It's going to be absolutely magical! ✨💖`;
+
+        responseMessage.innerHTML = msg;
+
+        // Add floating hearts
+        heartsDisplay.innerHTML = '💖💗💕💘💝';
+        setTimeout(() => {
+          heartsDisplay.innerHTML = '';
+        }, 4000);
+
+        // Disable yes button briefly for fun
+        yesBtn.disabled = true;
+        yesBtn.style.opacity = 0.6;
+        setTimeout(() => {
+          yesBtn.disabled = false;
+          yesBtn.style.opacity = 1;
+        }, 3000);
+      });
+
+      // ---------- Prevent no button from being clicked via accidental enter etc ----------
+      noBtn.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        moveButtonAway(e);
+      });
+
+      // Also move on touchstart for mobile
+      noBtn.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        moveButtonAway(e);
+      });
+
+      // Extra: move button to safe position on load
+      setTimeout(() => {
+        moveButtonAway({});
+      }, 100);
+
+    })();
+  </script>
+</body>
+</html>
+    
+</body>
+</html>
